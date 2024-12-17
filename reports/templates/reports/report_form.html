@@ -1,0 +1,18 @@
+{% if thank_you %}
+    <div id="thankYouMessage">Dziękujemy za przesłanie!</div>
+    <form method="get" action="{% url 'report_view' %}">
+        <button type="submit">Wróć do formularza</button>
+    </form>
+{% else %}
+    <form method="post" id="myForm">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Wyślij</button>
+    </form>
+{% endif %}
+<script>
+    {% if thank_you %}
+        document.getElementById('myForm').style.display = 'none';
+        document.getElementById('thankYouMessage').style.display = 'block';
+    {% endif %}
+</script>
